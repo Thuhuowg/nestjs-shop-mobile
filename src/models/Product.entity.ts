@@ -106,10 +106,9 @@ export class Product {
     brand: string;
 
     @Column()
-    product_image_avatar: string;
+    category_id: number
 
-    @Column()
-    product_images: string;
+  
 
     @CreateDateColumn({
         type: 'timestamp',

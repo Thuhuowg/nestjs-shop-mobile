@@ -1,4 +1,5 @@
-import {Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm'
+import {Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm'
+import { Product } from './Product.entity';
 
 
 @Entity({name: 'products_info'})
@@ -13,7 +14,7 @@ export class ProductInfo {
     product_id:number;
 
     @Column()
-    capacity:number;
+    capacity:string;
 
     @Column()
     available_capacity: number;
@@ -23,6 +24,18 @@ export class ProductInfo {
 
     @Column()
     price: number;
+
+    @Column()
+    quantity: number
+    
+    @Column()
+    product_image_avatar: string;
+
+    @Column()
+    product_images: string;
+
+  
+    
 
     @CreateDateColumn({
         type: 'timestamp',

@@ -10,15 +10,31 @@ import { ShoppingCart } from "src/models/Shopping-Cart.entity";
 import { ShoppingCartDetail } from "src/models/Shopping-Cart-Detail.entity";
 import { Staff } from "src/models/Staff.entity";
 import { User } from "src/models/User.entity";
+import { Camera } from "src/models/Camera.entity";
+import { Feature } from "src/models/Feature";
 const options: DataSourceOptions = {
     type: 'postgres',
     host: 'localhost',
     port: 5432,
     username: 'postgres',
     password: '123456',
-    database: 'motogp',
+    database: 'shop_mobile_phone',
     synchronize: false,
-    entities: [Category, Product, Customer, Invoice, OrderDetail, Order, ProductInfo, ShoppingCart, ShoppingCartDetail, Staff, User],
+    entities: [
+        Category, 
+        Product, 
+        Customer, 
+        Invoice, 
+        OrderDetail, 
+        Order, 
+        ProductInfo, 
+        ShoppingCart, 
+        ShoppingCartDetail, 
+        Staff, 
+        User,
+        Camera,
+        Feature
+    ],
 };
 
 export const DbConfig = new DataSource(options);

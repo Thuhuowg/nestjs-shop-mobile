@@ -134,10 +134,11 @@ export class createProductDto {
     brand
 
     @IsNotEmpty()
-    @IsString()
-    product_image_avatar
+    category_id
 
-    @IsNotEmpty()
-    @IsString()
-    product_images
+
+    // @IsString()
+    // product_image_avatar
+
+
 }

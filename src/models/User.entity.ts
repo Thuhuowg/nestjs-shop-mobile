@@ -7,10 +7,7 @@ export class User {
     id: string=uuidv4();
 
     @Column()
-    full_name:string;
-
-    @Column()
-    first_name:string;
+    username:string;
 
     @Column()
     email:string;

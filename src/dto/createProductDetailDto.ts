@@ -23,4 +23,7 @@ export class createProductDetailDto {
     @IsNotEmpty()
     @IsNumber()
     price
+
+@IsNotEmpty()
+quantity
 }
