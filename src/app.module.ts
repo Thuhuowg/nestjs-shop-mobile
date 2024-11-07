@@ -10,6 +10,8 @@ import { MulterModule } from '@nestjs/platform-express';
 
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { OrderModule } from './modules/orders/order.module';
+import { StripeModule } from './modules/stripes/stripe.module';
 @Module({
   imports: [
     ServeStaticModule.forRoot({
@@ -19,7 +21,9 @@ import { join } from 'path';
     TypeOrmModule.forRoot(DbConfigOptions),
     ProductModule,
     UserModule,
-    AuthModule
+    AuthModule,
+    OrderModule,
+    StripeModule
   ],
 
 })

@@ -21,34 +21,34 @@ export class ProductRepository {
         private readonly featureRepo: Repository<Feature>
     ) { }
     async getAttribute(type?: string) {
-        let query =''
-        if(type === 'camera') {
+        let query = ''
+        if (type === 'camera') {
             query = `select * from cameras`
-        const result = await this.cameraRepo.query(query)
-        console.log('-----result====', result)
-        return result
-        }else if(type === 'feature') {
+            const result = await this.cameraRepo.query(query)
+            console.log('-----result====', result)
+            return result
+        } else if (type === 'feature') {
             query = `select * from special_features`
             return await this.featureRepo.query(query)
         }
-        
-       
+
+
     }
-    async getProductById (product_id: number): Promise <Product|null> {
-        return await this.productRepo.findOne({where: {id: product_id}})
+    async getProductById(product_id: number): Promise<Product | null> {
+        return await this.productRepo.findOne({ where: { id: product_id } })
     }
     async createProduct(createProduct: createProductDto): Promise<Product | null> {
-        if(!createProduct) return null
+        if (!createProduct) return null
         const product = this.productRepo.create(createProduct);
         const pro_db = await this.productRepo.save(product)
         console.log('-----pro_db====', pro_db)
         return pro_db
     }
     // async saveAvatar (product_id: number,file_name: string) : Promise<Product|null> {
-       
+
     // }
-    async createProductDetail(createProductDetailDto: createProductDetailDto,images: string, image_ava: string): Promise<ProductInfo | null> {
-        
+    async createProductDetail(createProductDetailDto: createProductDetailDto, images: string, image_ava: string): Promise<ProductInfo | null> {
+
         const product_detail = this.productInfoRepo.create({
             ...createProductDetailDto,
             product_images: images,
@@ -88,9 +88,9 @@ GROUP BY
         }
         return await this.productRepo.query(query)
     }
-    async getProductDetail ( product_id: number) {
-        let query = 
-        `
+    async getProductDetail(product_id: number) {
+        let query =
+            `
         SELECT 
     p.id AS product_id,
     p.product_name,
@@ -103,7 +103,9 @@ GROUP BY
             'color', pi2.color,
             'product_price', pi2.price,
             'capacity_available', pi2.available_capacity ,
-            'quantity', pi2.quantity
+            'quantity', pi2.quantity,
+            'product_images', pi2.product_images,
+            'product_image_avatar', pi2.product_image_avatar
         )
     ) AS product_detail
 FROM 
@@ -119,5 +121,14 @@ GROUP BY
         const data = await this.productRepo.query(query)
         // console.log('data',data)
         return data[0]
+    }
+    async update_quantity (product_info_code: string, update_quantity: number) {
+        const pro = await this.productInfoRepo.findOne({where: {product_info_code: product_info_code}})
+        if(!pro) {
+            throw new Error('Product not found');
+        }
+        pro.quantity = pro.quantity - update_quantity
+        console.log(pro.quantity)
+        await this.productInfoRepo.update({ product_info_code: product_info_code }, { quantity: pro.quantity });
     }
 }
